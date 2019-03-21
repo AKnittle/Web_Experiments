@@ -1,6 +1,7 @@
 """Python Script to practice my ability to code in the language
 as well as refresh my ability to code basic data structures from scratch!"""
 
+import queue
 
 class Node:
 
@@ -40,6 +41,20 @@ class Node:
                 self.r_node.add_node(new_data)
         return
 
+    # Traverse Tree breadth wise and return a list, in breadth order
+    def travers_breadth_first(self):
+        visited_nodes = []
+        q = queue.queue()
+        q.add_to_queue(self)
+        while q.queue_list is not None:
+            curr_node = q.pop_queue()
+            if curr_node.l_node is not None:
+                q.add_to_queue(curr_node.l_node)
+            if curr_node.r_node is not None:
+                q.add_to_queue(curr_node.r_node)
+            visited_nodes.append(curr_node.data)
+        return visited_nodes
+
     # Prints the tree
     def print_tree(self):
         if self.l_node:
@@ -48,7 +63,10 @@ class Node:
         if self.r_node:
             self.r_node.print_tree()
 
+    # Prints the tree to look similar to it's actual representation, via Breadth First
     def nice_print_tree(self):
+        visited_nodes = self.travers_breadth_first()
+        print(visited_nodes)
         return
 
 
@@ -60,6 +78,7 @@ def main():
         # print(data_list[i])
         root.add_node(data_list[i])
     root.print_tree()
+    root.nice_print_tree()
     return
 
 
