@@ -9,10 +9,10 @@ class queue:
 
     def add_to_queue(self, data):
         if self.queue_list is None:
-            print("Creating New Queue...")
+            # print("Creating New Queue...")
             self.queue_list = [data]
         else:
-            print("Appending Queue...")
+            # print("Appending Queue...")
             self.queue_list.append(data)
 
     def pop_queue(self):

@@ -2,6 +2,8 @@
 as well as refresh my ability to code basic data structures from scratch!"""
 
 import queue
+import math
+
 
 class Node:
 
@@ -65,14 +67,29 @@ class Node:
 
     # Prints the tree to look similar to it's actual representation, via Breadth First
     def nice_print_tree(self):
+        exponent = 0
         visited_nodes = self.travers_breadth_first()
-        print(visited_nodes)
+        while visited_nodes is not None:
+            level_range = 2 ** exponent
+            if level_range > len(visited_nodes):
+                # print rest of visited nodes since this level is not full, and therefore the bottom
+                print("Level: " + str(visited_nodes))
+                return
+            else:
+                # Build level to print
+                level_list = visited_nodes[0:level_range]
+                # Prune levels off and update list
+                visited_nodes = visited_nodes[level_range:]
+                print("Level: " + str(level_list))
+                # print("Rest Of Tree: ")
+                # print(visited_nodes)
+                exponent = exponent + 1
         return
 
 
 # Build a Binary Tree
 def main():
-    data_list = [1, 2, 3, 49, 14, 93, 65, 100, 77, 32]
+    data_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     root = Node(0)
     for i in range(len(data_list)):
         # print(data_list[i])
