@@ -44,6 +44,7 @@ class Node:
         return
 
     # Traverse Tree breadth wise and return a list, in breadth order
+    # TODO: Fix order of visited_nodes
     def travers_breadth_first(self):
         visited_nodes = []
         q = queue.queue()
@@ -74,6 +75,7 @@ class Node:
             if level_range > len(visited_nodes):
                 # print rest of visited nodes since this level is not full, and therefore the bottom
                 print("Level: " + str(visited_nodes))
+                print("Depth: " + str(exponent))
                 return
             else:
                 # Build level to print
@@ -81,20 +83,17 @@ class Node:
                 # Prune levels off and update list
                 visited_nodes = visited_nodes[level_range:]
                 print("Level: " + str(level_list))
-                # print("Rest Of Tree: ")
-                # print(visited_nodes)
                 exponent = exponent + 1
         return
 
 
 # Build a Binary Tree
 def main():
-    data_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    root = Node(0)
+    data_list = [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15]
+    root = Node(7)
     for i in range(len(data_list)):
-        # print(data_list[i])
         root.add_node(data_list[i])
-    root.print_tree()
+    # root.print_tree()
     root.nice_print_tree()
     return
 
