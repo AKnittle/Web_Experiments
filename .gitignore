@@ -3,3 +3,6 @@
 .idea/workspace.xml
 .idea/vcs.xml
 __pycache__/queue.cpython-37.pyc
+*.xml
+*.xml
+*.pyc
