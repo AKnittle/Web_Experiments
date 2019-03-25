@@ -44,18 +44,22 @@ class Node:
         return
 
     # Traverse Tree breadth wise and return a list, in breadth order
-    # TODO: Fix order of visited_nodes
     def travers_breadth_first(self):
-        visited_nodes = []
+        visited_nodes = [self.data]
         q = queue.queue()
         q.add_to_queue(self)
         while q.queue_list is not None:
             curr_node = q.pop_queue()
             if curr_node.l_node is not None:
                 q.add_to_queue(curr_node.l_node)
+                visited_nodes.append(curr_node.l_node.data)
+            else:
+                visited_nodes.append("N/a")
             if curr_node.r_node is not None:
                 q.add_to_queue(curr_node.r_node)
-            visited_nodes.append(curr_node.data)
+                visited_nodes.append(curr_node.r_node.data)
+            else:
+                visited_nodes.append("N/a")
         return visited_nodes
 
     # Prints the tree
@@ -83,18 +87,26 @@ class Node:
                 # Prune levels off and update list
                 visited_nodes = visited_nodes[level_range:]
                 print("Level: " + str(level_list))
+                if 0 < visited_nodes.count("N/a") == len(visited_nodes):
+                    print("Depth: " + str(exponent))
+                    return
                 exponent = exponent + 1
+                if len(visited_nodes) == 0:
+                    print("Depth: " + str(exponent))
+                    return
         return
 
 
 # Build a Binary Tree
 def main():
-    data_list = [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15]
-    root = Node(7)
+    data_list = [-1, 1, -2, 2, -3, 3, -3, 4, -5, 5, -6, 6, -7, 7]
+    root = Node(0)
     for i in range(len(data_list)):
         root.add_node(data_list[i])
+        root.nice_print_tree()
+        print("============================")
     # root.print_tree()
-    root.nice_print_tree()
+    # root.nice_print_tree()
     return
 
 
