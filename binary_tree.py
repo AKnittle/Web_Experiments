@@ -46,7 +46,7 @@ class Node:
     # Traverse Tree breadth wise and return a list, in breadth order
     def travers_breadth_first(self):
         visited_nodes = [self.data]
-        q = queue.queue()
+        q = queue.Queue()
         q.add_to_queue(self)
         while q.queue_list is not None:
             curr_node = q.pop_queue()

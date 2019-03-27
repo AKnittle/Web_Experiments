@@ -13,3 +13,6 @@ data/drive-download-20190323T170508Z-001/Netflix Raw Data.xlsx
 *.xml
 .idea/vcs.xml
 .idea/workspace.xml
+*.pyc
+*.xml
+*.xml

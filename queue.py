@@ -1,7 +1,7 @@
 """Queue Helper Class"""
 
 
-class queue:
+class Queue:
 
     # The option to initialize with just data or with pre-existing child nodes
     def __init__(self, queue_list=None):
