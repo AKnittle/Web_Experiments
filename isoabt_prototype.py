@@ -1,5 +1,7 @@
 """Prototype of game"""
 
+#import pygame
+
 """Class used to describe points in 2D space"""
 
 
@@ -9,6 +11,11 @@ class GeoPoint:
         self.x_coord = x_coord
         self.y_coord = y_coord
         self.data = data
+
+    # Returns Coordinates as a tuple (x, y)
+    def get_coords(self):
+        coords = (self.x_coord, self.y_coord)
+        return coords
 
     def print_point(self):
         x = str(self.x_coord)
@@ -23,17 +30,18 @@ class GeoPoint:
 
 
 class Shape:
-
     """
     point_list: List of points with no duplicates
     edge_list: List of edges between points in point_list with no duplicates
     tag_back: When False it means edges can not be bidirectional and must be one way (ie. A ---> B)
     """
+
     def __init__(self, point_list=None, edge_list=None, tag_back=False):
         self.point_list = point_list
         self.edge_list = edge_list
         self.tag_back = tag_back
 
+    # Adds point to point_list
     def add_point(self, point, connect_last_point=False):
         if self.point_list is None:
             self.point_list = [point]
@@ -49,7 +57,10 @@ class Shape:
                 last_point = self.point_list[len(self.point_list) - 1]
                 edge = (last_point, point)
                 # Add new edge and point to their respective lists
-                self.edge_list.append(edge)
+                if self.edge_list is None:
+                    self.edge_list = [edge]
+                else:
+                    self.edge_list.append(edge)
                 self.point_list.append(point)
             else:
                 # Add new Point to point_list
@@ -82,3 +93,30 @@ class Shape:
         print("Edge already exists")
         return False
 
+    # Draws shape by creating a list of points connected by edges.
+    def draw_shape(self):
+        connected_edges = []
+        for edge in self.edge_list:
+            point_a = edge[0]
+            point_b = edge[1]
+            coords_a = point_a.get_coords()
+            coords_b = point_b.get_coords()
+            edge = (coords_a, coords_b)
+            connected_edges.append(edge)
+        return connected_edges
+
+
+def main():
+    #pygame.init()
+    sample_points = [(1, 1), (2, 0)]
+    sample_shape = Shape()
+    point = GeoPoint(0, 0)
+    sample_shape.add_point(point)
+    for i in sample_points:
+        point = GeoPoint(i[0], i[1])
+        sample_shape.add_point(point, True)
+    print(sample_shape.draw_shape())
+
+
+if __name__ == "__main__":
+    main()
