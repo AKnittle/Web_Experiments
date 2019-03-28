@@ -150,7 +150,8 @@ def display_shape(connected_edges):
 
         # Clear the screen and set the screen background
         screen.fill(WHITE)
-        pygame.draw.lines(screen, BLACK, True, connected_edges[0], 5)
+        for edge in connected_edges:
+            pygame.draw.lines(screen, BLACK, True, edge, 5)
         # Go ahead and update the screen with what we've drawn.
         # This MUST happen after all the other drawing commands.
         pygame.display.flip()
@@ -167,10 +168,10 @@ def main():
     for i in sample_points:
         point = GeoPoint(i[0], i[1])
         sample_shape.add_point(point, True)
+    sample_shape.lazy_close_shape()
     shape_desc = sample_shape.draw_shape()
-    print(shape_desc[0])
-    #print(sample_shape.draw_shape())
-    display_shape(sample_shape.draw_shape())
+    #print(shape_desc)
+    display_shape(shape_desc)
 
 
 if __name__ == "__main__":
