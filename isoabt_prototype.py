@@ -93,6 +93,17 @@ class Shape:
         print("Edge already exists")
         return False
 
+    # Connects Last point to First point added
+    def lazy_close_shape(self):
+        point_list_len = len(self.point_list)
+        if point_list_len < 2:
+            print("Not enough points to create edge")
+            return False
+        point_a = self.point_list[point_list_len - 1]
+        point_b = self.point_list[0]
+        self.add_edge(point_a, point_b)
+        return True
+
     # Draws shape by creating a list of points connected by edges.
     def draw_shape(self):
         connected_edges = []
@@ -117,7 +128,7 @@ def display_shape(connected_edges):
     RED = (255, 0, 0)
 
     # Set the height and width of the screen
-    size = [400, 300]
+    size = [1000, 1000]
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption("Test 1 2 3")
 
@@ -139,7 +150,7 @@ def display_shape(connected_edges):
 
         # Clear the screen and set the screen background
         screen.fill(WHITE)
-        pygame.draw.lines(screen, BLACK, False, connected_edges[0], 5)
+        pygame.draw.lines(screen, BLACK, True, connected_edges[0], 5)
         # Go ahead and update the screen with what we've drawn.
         # This MUST happen after all the other drawing commands.
         pygame.display.flip()
@@ -149,14 +160,16 @@ def display_shape(connected_edges):
 
 
 def main():
-    sample_points = [(500, 0), (500, 500)]
+    sample_points = [(100, 0), (100, 100)]
     sample_shape = Shape()
     point = GeoPoint(0, 0)
     sample_shape.add_point(point)
     for i in sample_points:
         point = GeoPoint(i[0], i[1])
         sample_shape.add_point(point, True)
-    print(sample_shape.draw_shape())
+    shape_desc = sample_shape.draw_shape()
+    print(shape_desc[0])
+    #print(sample_shape.draw_shape())
     display_shape(sample_shape.draw_shape())
 
 
