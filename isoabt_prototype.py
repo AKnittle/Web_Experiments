@@ -121,14 +121,11 @@ def display_shape(connected_edges):
     pygame.init()
 
     # Define the colors we will use in RGB format
-    BLACK = (0, 0, 0)
-    WHITE = (255, 255, 255)
-    BLUE = (0, 0, 255)
-    GREEN = (0, 255, 0)
-    RED = (255, 0, 0)
+    black = (0, 0, 0)
+    white = (255, 255, 255)
 
     # Set the height and width of the screen
-    size = [1000, 1000]
+    size = [500, 500]
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption("Test 1 2 3")
 
@@ -137,31 +134,23 @@ def display_shape(connected_edges):
     clock = pygame.time.Clock()
     while not done:
 
-        # This limits the while loop to a max of 10 times per second.
-        # Leave this out and we will use all CPU we can.
         clock.tick(10)
 
-        for event in pygame.event.get():  # User did something
-            if event.type == pygame.QUIT:  # If user clicked close
-                done = True  # Flag that we are done so we exit this loop
+        # User interaction
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done = True
 
-        # All drawing code happens after the for loop and but
-        # inside the main while done==False loop.
-
-        # Clear the screen and set the screen background
-        screen.fill(WHITE)
+        screen.fill(white)
         for edge in connected_edges:
-            pygame.draw.lines(screen, BLACK, True, edge, 5)
-        # Go ahead and update the screen with what we've drawn.
-        # This MUST happen after all the other drawing commands.
+            pygame.draw.lines(screen, black, True, edge, 5)
         pygame.display.flip()
 
-    # Be IDLE friendly
     pygame.quit()
 
 
 def main():
-    sample_points = [(100, 0), (100, 100)]
+    sample_points = [(500, 0), (500, 500), (25, 500), (25, 25), (475, 25), (475, 475)]
     sample_shape = Shape()
     point = GeoPoint(0, 0)
     sample_shape.add_point(point)
@@ -170,7 +159,6 @@ def main():
         sample_shape.add_point(point, True)
     sample_shape.lazy_close_shape()
     shape_desc = sample_shape.draw_shape()
-    #print(shape_desc)
     display_shape(shape_desc)
 
 
